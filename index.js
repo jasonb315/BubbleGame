@@ -32,9 +32,8 @@ function blowBubble(){
     // out: bubble to bubbles
     // 10 to 100px bubble size
     let radius = Math.random() * (100-10) + 10;
-    let x = myGameArea.width - radius;
-    // Math.random() * (max - min) + min;
-    let y = 50;
+    let x = Math.random() * (myGameArea.canvas.width - radius * 2) + radius;
+    let y = 0 - radius;
     
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -62,8 +61,8 @@ var myGameArea = {
 
     start : function() {
         // NOTE: writeover dimentions in css for screen proportions
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        this.canvas.width = window.innerWidth - 100;
+        this.canvas.height = window.innerHeight - 100;
         // canvas type:
         this.context = this.canvas.getContext("2d");
         // append to DOM:
@@ -76,8 +75,6 @@ var myGameArea = {
     },
 
     blowCycle : 0,
-
-    width : window.innerWidth,
 }
 
 
