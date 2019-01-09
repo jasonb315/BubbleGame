@@ -21,8 +21,12 @@ canvas {
     left: 10%;
 }
 
-#scoreRead{
+#scoreBox{
     position: absolute;
     top: 30px;
     left: 10%;
+}
+
+#scoreRead{
+    position: relative;
 }
