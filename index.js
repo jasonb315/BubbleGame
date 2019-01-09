@@ -1,5 +1,8 @@
 ////////[:][:][:][:]////////
 
+// 10-100px per sec
+var speed= 10;
+
 var bubbles = [];
 // create a bubble each second, or 1000ms
 // render them all updated to position on interval
@@ -12,34 +15,34 @@ function Bubble(x, y, size) {
     this.x = x;
     this.y = y;
     this.size = size;
-    
+
+    this.updatePosition = function(){
+        this.y += speed;
+    };
+
     this.place = function() {
             c = myGameArea.context;
-            c.beginPAth();
-            c.arc(this.x, this.y, this.size);
+            c.beginPath();
+            c.arc(this.x, this.y, this.size, Math.PI * 2, false);
             c.stroke();
-        }
-    return this;
-}
+    };
+};
 
 function blowBubble(){
     // out: bubble to bubbles
     // 10 to 100px bubble size
-    let size = Math.random() * (100-10) + 10;
-    let x = window.innerWidth / 2;
-    let y = 20;
-    b = new Bubble(x, y, size);
+    let radius = Math.random() * (100-10) + 10;
+    let x = 50;
+    let y = 50;
+    b = new Bubble(x, y, radius);
     bubbles.push(b);
-}
+};
 
 function drawBubbles(){
     for (i=0 ; i < bubbles.length ; i++){
-        c = myGameArea.context;
-        c.beginPath();
-        c.arc(bubbles[i].x, bubbles[i].y, bubbles[i].size, Math.PI * 2, false);
-        c.stroke();
-    }
-}
+        bubbles[i].place();
+    };
+};
 
 function startGame() {
     //component definitions
@@ -66,6 +69,9 @@ var myGameArea = {
         // some code that clears the canvas for redraw
     }
 }
+
+
+////////XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//////
 
 function updateGameArea() {
     console.log('updating');
