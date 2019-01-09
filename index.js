@@ -2,6 +2,7 @@ const scoreBoard = document.getElementById('scoreRead');
 const scoreReport = document.getElementById('scoreReport');
 const el = document.getElementById('clickFrame');
 const motivationReport = document.getElementById('motivationReport');
+const highScoreBoard = document.getElementById('highScore');
 const radPoint = {
     10: 10,
     20: 9,
@@ -16,11 +17,11 @@ const radPoint = {
 };
 let mouse = {x: undefined, y: undefined};
 let bubbles = [];
-let speed = 10;
+let speed = 33;
 let score = 0;
 let accumulativeScorePenalty = 0;
-
 var motivation = window.innerHeight - 141 - 50;
+let highScore = 0;
 
 var myGameArea = {
 
@@ -67,7 +68,6 @@ function Bubble(x, y, radius, color, fillC) {
                 let newPoints = radPoint[(Math.floor((this.radius * 2) / 10 ) * 10)];
                 score -= (newPoints + accumulativeScorePenalty);
                 accumulativeScorePenalty += 1;
-                console.log(accumulativeScorePenalty);
                 motivationReport.innerHTML = "- " + (newPoints + accumulativeScorePenalty).toString();
                 setTimeout(clearMotivationReport, 500);
                 scoreBoard.innerHTML = score.toString();
@@ -77,7 +77,7 @@ function Bubble(x, y, radius, color, fillC) {
     };
 
     this.place = function() {
-            c = myGameArea.context;
+            let c = myGameArea.context;
             c.beginPath();
             c.arc(this.x, this.y, this.radius, Math.PI * 2, false);
             c.strokeStyle = color.toString();
@@ -98,13 +98,9 @@ function getColor(){
     return color;
 }
 
-let bubId = 0;
-
 function blowBubble(){
     // TASK: Dots should vary randomly in size from 10px in diameter to 100px in DIAMETER!
     let radius = Math.ceil(Math.random() * (50-5) + 5);
-
-    console.log(radius)
     // TASK: A dot should not "hang" off the left or right edge of the screen.
     let x = Math.random() * (myGameArea.canvas.width - radius * 2) + radius;
     // TASK: New dots appear at a random horizontal position at the top of the box.
@@ -160,6 +156,13 @@ function updateGameArea() {
         // TASK: A new dot should also appear every 1000ms.
         blowBubble();
         myGameArea.blowCycle = 0;
+
+        
+    };
+
+    if(score > highScore){
+        highScore = score;
+        highScoreBoard.innerHTML = "HIGH SCORE: " + highScore.toString();
     };
 };
 
@@ -170,10 +173,6 @@ function clearMotivationReport(){
 function clearScoreReport(){
     scoreReport.innerHTML = ''
 }
-
-// function clearText(t){
-//     t.innerHTML = '';
-// }
 
 el.addEventListener('click', function(event){
         mouse.x = event.x;
@@ -202,7 +201,8 @@ el.addEventListener('click', function(event){
                     let newPoints = radPoint[(Math.floor((bubbles[i].radius * 2) / 10 ) * 10)];
     
                     score += (parseInt(newPoints)+parseInt(speed));
-                    scoreReport.innerHTML = "+ " + newPoints.toString();
+                
+                    scoreReport.innerHTML = "+ " + newPoints.toString() + " + " + speed.toString();
                     scoreBoard.innerHTML = score.toString();
                     setTimeout(clearScoreReport, 500);
 
@@ -232,4 +232,3 @@ slider.oninput = function() {
     // and at the SLIDER's right-most position, should fall at a speed of 100px per second.
   speed = this.value;
 };
-
