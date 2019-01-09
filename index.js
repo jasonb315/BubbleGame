@@ -5,6 +5,25 @@ let bubbles = [];
 let speed = 10;
 let score = 0;
 
+var myGameArea = {
+
+    canvas : document.createElement("canvas"), 
+
+    start : function() {
+        this.canvas.width = window.innerWidth - 6;
+        this.canvas.height = window.innerHeight - 150;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.getElementById('canvasAnchor'));
+        this.interval = setInterval(updateGameArea, 20);
+        },
+
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        },
+
+    blowCycle : 0,
+};
+
 function Bubble(x, y, radius, color) {
 
     this.x = x;
@@ -72,26 +91,6 @@ function startGame() {
     myGameArea.start();
 
 }
-
-var myGameArea = {
-
-    canvas : document.createElement("canvas"), 
-
-    start : function() {
-        this.canvas.width = window.innerWidth - 6;
-        this.canvas.height = window.innerHeight - 150;
-        this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.getElementById('canvasAnchor'));
-        this.interval = setInterval(updateGameArea, 20);
-        },
-
-    clear : function() {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        },
-
-    blowCycle : 0,
-
-};
 
 function updateGameArea() {
     //this fx redraws every 20ms
