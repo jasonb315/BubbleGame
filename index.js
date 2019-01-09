@@ -15,7 +15,7 @@ function Bubble(x, y, size) {
     this.updatePosition = function(){
         // this will be called every 20ms, so that's 50 updates per second.
         // y = the position it's at, plus pix per sec over refresh ratio; so the speed is per sec in ms.
-        this.y = (y + speed/50);
+        this.y = (this.y + speed/50);
     };
 
     this.place = function() {
@@ -82,7 +82,7 @@ function updateGameArea() {
     drawBubbles();
 
     myGameArea.blowCycle += 20;
-
+    //blow a new one every 1000ms
     if (myGameArea.blowCycle === 1000){
         // per second updates, happens once every 50 cycles = 1000 ms
         blowBubble();
