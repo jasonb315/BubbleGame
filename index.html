@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charset="utf-8"/>
+
+        <link rel="stylesheet" href="reset.css">
+        <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body id="clickFrame" onload="startGame()">
+
+        <section id="infoBoard">
+
+            <p id="scoreBox"><span id="scoreRead"></span> points</p>
+
+            <p id="speedBox">Speed: <span id="speedRead"></span> pixels per second</p>
+
+            <div class="slidecontainer">
+                <input type="range" min="10" max="100" value="10" class="slider" id="sRange">
+            </div>
+
+        </section>
+
+        <div id="canvasAnchor"></div>
+
+        <span id="scoreReport"></span>
+
+        <div id="gitTag"><a href="https://github.com/jasonb315/BubbleGame"><i class="fab fa-git-square"></i></a></div>
+
+        <script src="index.js"></script>
+
+    </body>
+
+</html>
