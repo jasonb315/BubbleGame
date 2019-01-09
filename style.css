@@ -43,6 +43,19 @@ canvas {
     font-size: .8em;
 }
 
+#motivation{
+    position: absolute;
+    border-bottom: red;
+    border-style: solid;
+    border-width: 1px;
+    bottom: 50px;
+    width: 95%;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
 /* Slider */
 
 .slidecontainer {
@@ -92,7 +105,16 @@ canvas {
     color: white;
     background-color: transparent;
     display:inline-block;
-    z-index: 1;
+}
+
+#motivationReport{
+    font-size: 1em;
+    position: absolute;
+    bottom: 60px;
+    left: 10%;
+    color: red;
+    background-color: transparent;
+    display:inline-block;
 }
 
 #gitTag{
@@ -107,6 +129,6 @@ i {
 }
 
 i:hover{
-    color: #cec;
+    color: #000;
 }
 
