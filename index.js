@@ -25,14 +25,14 @@ var myGameArea = {
     blowCycle : 0,
 };
 
-function Bubble(x, y, radius, color, fillC, pop=false) {
+function Bubble(x, y, radius, color, fillC) {
 
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.color = color;
     this.fillC = fillC;
-    this.pop = pop;
+    this.pop = false;
 
     this.updatePosition = function(){
         // TASK: Dots fall smoothly at a constant rate.
@@ -56,20 +56,7 @@ function Bubble(x, y, radius, color, fillC, pop=false) {
             c.fillStyle = this.fillC;
             c.fill();
             c.stroke();
-    };
-
-    // this.pOp = function(){
-    //     for (let i = 0 ; i < 10 ; i++){
-
-    //         this.radius = this.radius/2;
-    //     }
-        // this.radius = this.radius/2;
-        // while(this.radius > 0){
-        //     setTimeout(function() {
-        //         this.radius -=
-        //     }, 50);
-        // }
-    
+    };    
 };
 
 function getColor(){
@@ -85,7 +72,10 @@ function getColor(){
 
 function blowBubble(){
     // TASK: Dots should vary randomly in size from 10px in diameter to 100px in DIAMETER!
-    let radius = Math.random() * (50-5) + 5;
+    // let radius = Math.ceil(Math.random() * (50-5) + 5);
+    let radius = Math.ceil(Math.random() * (50-5) + 5);
+
+    // console.log(radius)
     // TASK: A dot should not "hang" off the left or right edge of the screen.
     let x = Math.random() * (myGameArea.canvas.width - radius * 2) + radius;
     // TASK: New dots appear at a random horizontal position at the top of the box.
@@ -162,11 +152,11 @@ el.addEventListener('click', function(event){
                 if (yB < yClick){ yDif = yClick - yB; } else if (yB > yClick) { yDif = yB - yClick; } else { yDif = 0; };
     
                 // NOTE: + 10 for ux for, note
-                if ((yDif + xDif) < bubbles[i].radius + 10){
+                if ((yDif + xDif) < bubbles[i].radius + 10 && (bubbles[i].pop == false)){
     
                     // TASK: The score should be incremented by a value inversely proportional to the size
                     // of the dot, with 10px dots worth 10 points, and 100px dots worth 1 point.
-                    let newPoints = Math.floor((10 - (bubbles[i].radius * 2) / 10) + 1);
+                    let newPoints = Math.floor((10 - (bubbles[i].radius * 2 + 1) / 10)) + 1;
     
                     score += newPoints;
                     scoreReport.innerHTML = "+ " + newPoints.toString();
@@ -179,6 +169,7 @@ el.addEventListener('click', function(event){
                     bubbles[i].pop = true;
                     // bubbles.splice(i, 1);
                     setTimeout(blowBubble, 1000);
+                    break;
                 };      
             };
         };
