@@ -25,13 +25,14 @@ function Bubble(x, y, size, color) {
             c.strokeStyle = color.toString();
             c.stroke();
     };
+    console.log(this);
 };
 
 function blowBubble(){
     // out: bubble to bubbles
     // 10 to 100px bubble size
     let radius = Math.random() * (100-10) + 10;
-    let x = Math.random() * (window.innerWidth-(radius/2)) + (radius/2);
+    let x = myGameArea.width - radius;
     // Math.random() * (max - min) + min;
     let y = 50;
     
@@ -75,6 +76,8 @@ var myGameArea = {
     },
 
     blowCycle : 0,
+
+    width : window.innerWidth,
 }
 
 
