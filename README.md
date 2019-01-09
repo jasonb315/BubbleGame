@@ -1,6 +1,6 @@
 # BubbleGame
 
-![bubble-game](https://github.com/jasonb315/BubbleGame/blob/master/assets/screen.PNG) <br>
+![bubble-game](https://github.com/jasonb315/BubbleGame/blob/master/assets/screen2.PNG) <br>
 
 Guidelines for Completing the Exercise
 
