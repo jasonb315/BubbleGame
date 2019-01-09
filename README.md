@@ -16,17 +16,17 @@ Building the Game
 
     - [x] Dots fall smoothly at a constant rate.
     
-    - [ ] A player should be able to use a SLIDER to control the speed at which dots fall. 
+    - [x] A player should be able to use a SLIDER to control the speed at which dots fall. 
 
-    - [ ] When the SLIDER is changed, all dots including currently falling dots and newly created dots should change speed.
+    - [x] When the SLIDER is changed, all dots including currently falling dots and newly created dots should change speed.
 
-    - [ ] At the SLIDER's left-most position, dots should fall at a speed of 10px per second, and at the SLIDER's right-most position, should fall at a speed of 100px per second.
+    - [x] At the SLIDER's left-most position, dots should fall at a speed of 10px per second, and at the SLIDER's right-most position, should fall at a speed of 100px per second.
 
     - [x] New dots appear at a random horizontal position at the top of the box.
     - [x] A dot should not "hang" off the left or right edge of the screen.
     - [x] Dots should vary randomly in size from 10px in diameter to 100px in diameter.
 
-    - [ ] When a player touches or clicks a dot, the dot should disappear from the box and a new dot should appear at the top of the page 1000ms later.
+    - [x] When a player touches or clicks a dot, the dot should disappear from the box and a new dot should appear at the top of the page 1000ms later.
     
     - [ ] The score should be incremented by a value inversely proportional to the size of the dot, with 10px dots worth 10 points, and 100px dots worth 1 point.
 

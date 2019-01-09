@@ -108,7 +108,7 @@ var mouse = {x: undefined, y: undefined};
 
 el.addEventListener('click', function(event){
         mouse.x = event.x;
-        mouse.y = event.y - 150;
+        mouse.y = event.y - 141;
         // console.log(mouse);
         // for (i=0 ; i < bubbles.length ; i++){
         for (i=0 ; i < bubbles.length ; i++){
@@ -120,47 +120,17 @@ el.addEventListener('click', function(event){
             let xDif = 0;
             let yDif = 0;
 
-            // if (xB < xClick){ xDif = xClick - xB; } else if (xB > xClick) {xDif = xB - xClick;} else { xDif = 0; };
+            //NOTE: needs work, click area is aligned properly but click surface is a diamond.
+            if (xB < xClick){ xDif = xClick - xB; } else if (xB > xClick) { xDif = xB - xClick; } else { xDif = 0; };
+            if (yB < yClick){ yDif = yClick - yB; } else if (yB > yClick) { yDif = yB - yClick; } else { yDif = 0; };
 
-            // if (yB < yClick){ yDif = yClick - yB; } else if (yB > yClick) {yDif = yB - yClick;} else { yDif = 0; };
-
-            if (xB < xClick){
-                xDif = xClick - xB;
-                // console.log(xDif)
-
-            } else if (xB > xClick) {
-                xDif = xB - xClick;
-                // console.log(xDif)
-
-            } else { xDif = 0;
-                // console.log(xDif)
-            };
-            
-            if (yB < yClick){
-                yDif = yClick - yB; 
-                // console.log(yDif)
-            } else if (yB > yClick) {
-                yDif = yB - yClick;
-                // console.log(yDif)
-
-            } else { yDif = 0;
-                // console.log(yDif)
-            };
-            // (xDif + yDif) < bubbles[i].radius
             if ((yDif + xDif) < bubbles[i].radius){
-                console.log('delete it');
-            }
-            // console.log((mouse.x - bubbles[i].x) + ((mouse.y -150) - bubbles[i].y))
-            // if((mouse.x - bubbles[i].x) + ((mouse.y -150) - bubbles[i].y) < 100){
-            //     console.log('ding')
-            // }
-
-
-
-            // console.log((mouse.x) - bubbles[i].x)
-            // console.log(mouse.y-150 - bubbles[i].y)
-            
-        }
+                // remove dynamically
+                bubbles.splice(i, 1);
+                // redraw another circle also
+                setTimeout(blowBubble, 1000);
+            };       
+        };
 });
 
 //////////////////////SLIDER////////////
