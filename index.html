@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta charset="utf-8"/>
 
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="slider.css">
+
 </head>
 
 <body id="clickFrame" onload="startGame()">
 
-    <header>
-        <section>
+        <section id="infoBoard">
             <span>SCORE</span>
-            <span>SLIDER</span>
+
+            <p>Value: <span id="speedRead"></span></p>
+
+            <div class="slidecontainer">
+                <input type="range" min="10" max="100" value="10" class="slider" id="sRange">
+            </div>
+
         </section>
-    </header>
 
         <div id="canvasAnchor"></div>
 

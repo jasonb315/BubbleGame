@@ -1,6 +1,5 @@
 // 10-100px per sec
 var speed= 10;
-
 var bubbles = [];
 // create a bubble each second, or 1000ms
 // render them all updated to position on interval
@@ -61,8 +60,8 @@ var myGameArea = {
 
     start : function() {
         // NOTE: writeover dimentions in css for screen proportions
-        this.canvas.width = window.innerWidth - 100;
-        this.canvas.height = window.innerHeight - 100;
+        this.canvas.width = window.innerWidth - 6;
+        this.canvas.height = window.innerHeight - 150;
         // canvas type:
         this.context = this.canvas.getContext("2d");
         // append to DOM:
@@ -83,6 +82,7 @@ myGameArea.canvas.id = "canvas"
 
 function updateGameArea() {
     //this fx redraws every 20ms
+    // console.log('updating');
     for (i=0 ; i < bubbles.length ; i++){
         bubbles[i].updatePosition();
     }
@@ -96,9 +96,10 @@ function updateGameArea() {
         blowBubble();
         myGameArea.blowCycle = 0;
     }
-    
-    // // console.log('updating');
 }
+
+////////XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//////
+
 
 // document.getElementById('bubbleCavas').addEventListener('click', console.log('ding'));
 var el = document.getElementById('clickFrame');
@@ -109,4 +110,23 @@ el.addEventListener('click', function(event){
         mouse.x = event.x;
         mouse.y = event.y;
         console.log(mouse);
-    })
+        // for (i=0 ; i < bubbles.length ; i++){
+        for (i=0 ; i < 1 ; i++){
+
+            let test = ((mouse.x - bubbles[i].x) + (mouse.y - bubbles[i].y))
+            
+        }
+});
+
+//////////////////////SLIDER////////////
+
+var slider = document.getElementById("sRange");
+var output = document.getElementById("speedRead");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+  speed = this.value;
+}
+
+//////////////////////SLIDER////////////
