@@ -25,7 +25,7 @@ function Bubble(x, y, size, color) {
             c.strokeStyle = color.toString();
             c.stroke();
     };
-    console.log(this);
+    // console.log(this);
 };
 
 function blowBubble(){
@@ -57,7 +57,7 @@ function startGame() {
 
 var myGameArea = {
 
-    canvas : document.createElement("canvas"),
+    canvas : document.createElement("canvas"), 
 
     start : function() {
         // NOTE: writeover dimentions in css for screen proportions
@@ -66,7 +66,7 @@ var myGameArea = {
         // canvas type:
         this.context = this.canvas.getContext("2d");
         // append to DOM:
-        document.body.insertBefore(this.canvas, document.getElementById('bubbleCavas'));
+        document.body.insertBefore(this.canvas, document.getElementById('canvasAnchor'));
         this.interval = setInterval(updateGameArea, 20);
         },
 
@@ -77,6 +77,7 @@ var myGameArea = {
     blowCycle : 0,
 }
 
+myGameArea.canvas.id = "canvas"
 
 ////////XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//////
 
@@ -98,3 +99,14 @@ function updateGameArea() {
     
     // // console.log('updating');
 }
+
+// document.getElementById('bubbleCavas').addEventListener('click', console.log('ding'));
+var el = document.getElementById('clickFrame');
+
+var mouse = {x: undefined, y: undefined};
+
+el.addEventListener('click', function(event){
+        mouse.x = event.x;
+        mouse.y = event.y;
+        console.log(mouse);
+    })

@@ -22,8 +22,8 @@ Building the Game
 
     - [ ] At the SLIDER's left-most position, dots should fall at a speed of 10px per second, and at the SLIDER's right-most position, should fall at a speed of 100px per second.
 
-    - [ ] New dots appear at a random horizontal position at the top of the box.
-    - [ ] A dot should not "hang" off the left or right edge of the screen.
+    - [x] New dots appear at a random horizontal position at the top of the box.
+    - [x] A dot should not "hang" off the left or right edge of the screen.
     - [x] Dots should vary randomly in size from 10px in diameter to 100px in diameter.
 
     - [ ] When a player touches or clicks a dot, the dot should disappear from the box and a new dot should appear at the top of the page 1000ms later.
