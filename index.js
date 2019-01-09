@@ -6,10 +6,10 @@ var bubbles = [];
 // event listener for click on each
     // score += (size by speed)
 
-function Bubble(x, y, size, color) {
+function Bubble(x, y, radius, color) {
     this.x = x;
     this.y = y;
-    this.size = size;
+    this.radius = radius;
     this.color = color;
 
     this.updatePosition = function(){
@@ -20,7 +20,7 @@ function Bubble(x, y, size, color) {
     this.place = function() {
             c = myGameArea.context;
             c.beginPath();
-            c.arc(this.x, this.y, this.size, Math.PI * 2, false);
+            c.arc(this.x, this.y, this.radius, Math.PI * 2, false);
             c.strokeStyle = color.toString();
             c.stroke();
     };
@@ -29,7 +29,7 @@ function Bubble(x, y, size, color) {
 
 function blowBubble(){
     // out: bubble to bubbles
-    // 10 to 100px bubble size
+    // 10 to 100px bubble radius
     let radius = Math.random() * (100-10) + 10;
     let x = Math.random() * (myGameArea.canvas.width - radius * 2) + radius;
     let y = 0 - radius;
@@ -94,7 +94,7 @@ function updateGameArea() {
     if (myGameArea.blowCycle === 1000){
         // per second updates, happens once every 50 cycles = 1000 ms
         blowBubble();
-        myGameArea.blowCycle = 0;
+        // myGameArea.blowCycle = 0;
     }
 }
 
@@ -108,12 +108,57 @@ var mouse = {x: undefined, y: undefined};
 
 el.addEventListener('click', function(event){
         mouse.x = event.x;
-        mouse.y = event.y;
-        console.log(mouse);
+        mouse.y = event.y - 150;
+        // console.log(mouse);
         // for (i=0 ; i < bubbles.length ; i++){
-        for (i=0 ; i < 1 ; i++){
+        for (i=0 ; i < bubbles.length ; i++){
 
-            let test = ((mouse.x - bubbles[i].x) + (mouse.y - bubbles[i].y))
+            let xClick = mouse.x;
+            let yClick = mouse.y;
+            let xB = bubbles[i].x;
+            let yB = bubbles[i].y;
+            let xDif = 0;
+            let yDif = 0;
+
+            // if (xB < xClick){ xDif = xClick - xB; } else if (xB > xClick) {xDif = xB - xClick;} else { xDif = 0; };
+
+            // if (yB < yClick){ yDif = yClick - yB; } else if (yB > yClick) {yDif = yB - yClick;} else { yDif = 0; };
+
+            if (xB < xClick){
+                xDif = xClick - xB;
+                // console.log(xDif)
+
+            } else if (xB > xClick) {
+                xDif = xB - xClick;
+                // console.log(xDif)
+
+            } else { xDif = 0;
+                // console.log(xDif)
+            };
+            
+            if (yB < yClick){
+                yDif = yClick - yB; 
+                // console.log(yDif)
+            } else if (yB > yClick) {
+                yDif = yB - yClick;
+                // console.log(yDif)
+
+            } else { yDif = 0;
+                // console.log(yDif)
+            };
+            // (xDif + yDif) < bubbles[i].radius
+            if ((yDif + xDif) < bubbles[i].radius){
+                console.log('delete it');
+            }
+            // console.log((mouse.x - bubbles[i].x) + ((mouse.y -150) - bubbles[i].y))
+            // if((mouse.x - bubbles[i].x) + ((mouse.y -150) - bubbles[i].y) < 100){
+            //     console.log('ding')
+            // }
+
+
+
+            // console.log((mouse.x) - bubbles[i].x)
+            // console.log(mouse.y-150 - bubbles[i].y)
             
         }
 });
