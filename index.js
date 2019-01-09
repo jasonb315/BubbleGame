@@ -1,6 +1,8 @@
 const scoreBoard = document.getElementById('scoreRead');
 const scoreReport = document.getElementById('scoreReport');
 const el = document.getElementById('clickFrame');
+const motivationReport = document.getElementById('motivationReport');
+const highScoreBoard = document.getElementById('highScore');
 const radPoint = {
     10: 10,
     20: 9,
@@ -15,8 +17,11 @@ const radPoint = {
 };
 let mouse = {x: undefined, y: undefined};
 let bubbles = [];
-let speed = 10;
+let speed = 33;
 let score = 0;
+let accumulativeScorePenalty = 0;
+var motivation = window.innerHeight - 141 - 50;
+let highScore = 0;
 
 var myGameArea = {
 
@@ -38,7 +43,6 @@ var myGameArea = {
 };
 
 function Bubble(x, y, radius, color, fillC) {
-
     this.x = x;
     this.y = y;
     this.radius = radius;
@@ -51,17 +55,29 @@ function Bubble(x, y, radius, color, fillC) {
         // this will be called every 20ms, so that's 50 updates per second.
         // y = the position it's at, plus pix per sec over refresh ratio; so the speed is per sec in ms.
         this.y = (this.y + speed / 50);
-
+        //shrink if popped
         if (this.pop && this.radius > 1){
             this.radius -= 6;
         }
         if (this.pop && this.radius < 6){
             this.radius = 0;
         }
+        //pop if redlined at #movtivation:
+        if (this.y + this.radius > motivation){
+            if (this.pop == false){
+                let newPoints = radPoint[(Math.floor((this.radius * 2) / 10 ) * 10)];
+                score -= (newPoints + accumulativeScorePenalty);
+                accumulativeScorePenalty += 1;
+                motivationReport.innerHTML = "- " + (newPoints + accumulativeScorePenalty).toString();
+                setTimeout(clearMotivationReport, 500);
+                scoreBoard.innerHTML = score.toString();
+            }
+            this.pop = true;
+        };
     };
 
     this.place = function() {
-            c = myGameArea.context;
+            let c = myGameArea.context;
             c.beginPath();
             c.arc(this.x, this.y, this.radius, Math.PI * 2, false);
             c.strokeStyle = color.toString();
@@ -85,8 +101,6 @@ function getColor(){
 function blowBubble(){
     // TASK: Dots should vary randomly in size from 10px in diameter to 100px in DIAMETER!
     let radius = Math.ceil(Math.random() * (50-5) + 5);
-
-    console.log(radius)
     // TASK: A dot should not "hang" off the left or right edge of the screen.
     let x = Math.random() * (myGameArea.canvas.width - radius * 2) + radius;
     // TASK: New dots appear at a random horizontal position at the top of the box.
@@ -126,6 +140,11 @@ function updateGameArea() {
     for (let i=0 ; i < bubbles.length ; i++){
         let bub = bubbles[i];
         bub.updatePosition();
+
+        //reuse loop to cleanup popped bubbles from global array to reduce loop times:
+        if (bub.radius === 0){
+            bubbles.splice(i, 1)
+        }
     };
 
     myGameArea.clear();
@@ -137,8 +156,19 @@ function updateGameArea() {
         // TASK: A new dot should also appear every 1000ms.
         blowBubble();
         myGameArea.blowCycle = 0;
+
+        
+    };
+
+    if(score > highScore){
+        highScore = score;
+        highScoreBoard.innerHTML = "HIGH SCORE: " + highScore.toString();
     };
 };
+
+function clearMotivationReport(){
+    motivationReport.innerHTML = ''
+}
 
 function clearScoreReport(){
     scoreReport.innerHTML = ''
@@ -162,7 +192,6 @@ el.addEventListener('click', function(event){
                 if (xB < xClick){ xDif = xClick - xB; } else if (xB > xClick) { xDif = xB - xClick; } else { xDif = 0; };
                 if (yB < yClick){ yDif = yClick - yB; } else if (yB > yClick) { yDif = yB - yClick; } else { yDif = 0; };
     
-                // NOTE: + 10 for ux for, note
                 if ((yDif + xDif) < bubbles[i].radius + 10 && (bubbles[i].pop == false)){
     
                     // TASK: The score should be incremented by a value inversely proportional to the size
@@ -171,8 +200,9 @@ el.addEventListener('click', function(event){
 
                     let newPoints = radPoint[(Math.floor((bubbles[i].radius * 2) / 10 ) * 10)];
     
-                    score += newPoints;
-                    scoreReport.innerHTML = "+ " + newPoints.toString();
+                    score += (parseInt(newPoints)+parseInt(speed));
+                
+                    scoreReport.innerHTML = "+ " + newPoints.toString() + " + " + speed.toString();
                     scoreBoard.innerHTML = score.toString();
                     setTimeout(clearScoreReport, 500);
 
