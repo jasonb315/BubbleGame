@@ -4,7 +4,7 @@ let bubbles = [];
 let score = 0;
 
 const scoreBoard = document.getElementById('scoreRead');
-scoreBoard.innerHTML='ding'
+scoreBoard.innerHTML='0'
 // scoreBoard.textContent('pop the bubbles!')
 // create a bubble each second, or 1000ms
 // render them all updated to position on interval
@@ -114,36 +114,38 @@ var mouse = {x: undefined, y: undefined};
 el.addEventListener('click', function(event){
         mouse.x = event.x;
         mouse.y = event.y - 140;
-        // console.log(mouse);
+        console.log(mouse);
         // for (i=0 ; i < bubbles.length ; i++){
-        for (i=0 ; i < bubbles.length ; i++){
+        if(mouse.y > 0){
+            for (i=0 ; i < bubbles.length ; i++){
+                
+                let xClick = mouse.x;
+                let yClick = mouse.y;
+                let xB = bubbles[i].x;
+                let yB = bubbles[i].y;
+                let xDif = 0;
+                let yDif = 0;
 
-            let xClick = mouse.x;
-            let yClick = mouse.y;
-            let xB = bubbles[i].x;
-            let yB = bubbles[i].y;
-            let xDif = 0;
-            let yDif = 0;
-
-            //NOTE: needs work, click area is aligned properly but click surface is a diamond.
-            if (xB < xClick){ xDif = xClick - xB; } else if (xB > xClick) { xDif = xB - xClick; } else { xDif = 0; };
-            if (yB < yClick){ yDif = yClick - yB; } else if (yB > yClick) { yDif = yB - yClick; } else { yDif = 0; };
-
-            // + 10 for ux for, note
-            if ((yDif + xDif) < bubbles[i].radius + 10){
-
-                // 10px dots worth 10 points, and 100px dots worth 1 point
-                let newPoints = Math.floor((10 - (bubbles[i].radius * 2) / 10) + 1);
-
-                score += newPoints;
-
-                scoreBoard.innerHTML = score.toString();
-
-                // remove dynamically
-                bubbles.splice(i, 1);
-                // redraw another circle also
-                setTimeout(blowBubble, 1000);
-            };       
+                //NOTE: needs work, click area is aligned properly but click surface is a diamond.
+                if (xB < xClick){ xDif = xClick - xB; } else if (xB > xClick) { xDif = xB - xClick; } else { xDif = 0; };
+                if (yB < yClick){ yDif = yClick - yB; } else if (yB > yClick) { yDif = yB - yClick; } else { yDif = 0; };
+    
+                // + 10 for ux for, note
+                if ((yDif + xDif) < bubbles[i].radius + 10){
+    
+                    // 10px dots worth 10 points, and 100px dots worth 1 point
+                    let newPoints = Math.floor((10 - (bubbles[i].radius * 2) / 10) + 1);
+    
+                    score += newPoints;
+    
+                    scoreBoard.innerHTML = score.toString();
+    
+                    // remove dynamically
+                    bubbles.splice(i, 1);
+                    // redraw another circle also
+                    setTimeout(blowBubble, 1000);
+                };       
+            };
         };
 });
 
