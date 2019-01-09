@@ -5,6 +5,18 @@ let mouse = {x: undefined, y: undefined};
 let bubbles = [];
 let speed = 10;
 let score = 0;
+const radPoint = {
+    10: 10,
+    20: 9,
+    30: 8,
+    40: 7,
+    50: 6,
+    60: 5,
+    70: 4,
+    80: 3,
+    90: 2,
+    100: 1,
+}
 
 var myGameArea = {
 
@@ -72,10 +84,9 @@ function getColor(){
 
 function blowBubble(){
     // TASK: Dots should vary randomly in size from 10px in diameter to 100px in DIAMETER!
-    // let radius = Math.ceil(Math.random() * (50-5) + 5);
     let radius = Math.ceil(Math.random() * (50-5) + 5);
 
-    // console.log(radius)
+    console.log(radius)
     // TASK: A dot should not "hang" off the left or right edge of the screen.
     let x = Math.random() * (myGameArea.canvas.width - radius * 2) + radius;
     // TASK: New dots appear at a random horizontal position at the top of the box.
@@ -156,7 +167,9 @@ el.addEventListener('click', function(event){
     
                     // TASK: The score should be incremented by a value inversely proportional to the size
                     // of the dot, with 10px dots worth 10 points, and 100px dots worth 1 point.
-                    let newPoints = Math.floor((10 - (bubbles[i].radius * 2 + 1) / 10)) + 1;
+                    // let newPoints = Math.floor((10 - (bubbles[i].radius * 2 + 1) / 10)) + 1;
+
+                    let newPoints = radPoint[(Math.floor((bubbles[i].radius * 2) / 10 ) * 10)];
     
                     score += newPoints;
                     scoreReport.innerHTML = "+ " + newPoints.toString();
