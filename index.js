@@ -1,10 +1,6 @@
 const scoreBoard = document.getElementById('scoreRead');
 const scoreReport = document.getElementById('scoreReport');
 const el = document.getElementById('clickFrame');
-let mouse = {x: undefined, y: undefined};
-let bubbles = [];
-let speed = 10;
-let score = 0;
 const radPoint = {
     10: 10,
     20: 9,
@@ -16,7 +12,11 @@ const radPoint = {
     80: 3,
     90: 2,
     100: 1,
-}
+};
+let mouse = {x: undefined, y: undefined};
+let bubbles = [];
+let speed = 10;
+let score = 0;
 
 var myGameArea = {
 
@@ -24,7 +24,7 @@ var myGameArea = {
 
     start : function() {
         this.canvas.width = window.innerWidth - 6;
-        this.canvas.height = window.innerHeight - 150;
+        this.canvas.height = window.innerHeight - 160;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.getElementById('canvasAnchor'));
         this.interval = setInterval(updateGameArea, 20);

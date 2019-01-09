@@ -1,12 +1,14 @@
 # BubbleGame
 
+![bubble-game](https://github.com/jasonb315/BubbleGame/blob/master/assets/screen.jpg) <br>
+
 Guidelines for Completing the Exercise
 
     - [x] Your application should work in current Chrome.
 
     - [x] You can edit any file in the project.
 
-    - [ ] When you are ready to share your work, respond to the original email; please include a link to this page, and the approximate amount of time you spent on the exercise.
+    - [x] When you are ready to share your work, respond to the original email; please include a link to this page, and the approximate amount of time you spent on the exercise.
 
 Building the Game
 
