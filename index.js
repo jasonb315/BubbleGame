@@ -51,7 +51,7 @@ function getColor(){
 
     var letters = '0123456789ABCDEF';
     var color = '#';
-    for (var i = 0; i < 6; i++) {
+    for (let i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
 
@@ -73,7 +73,7 @@ function blowBubble(){
 };
 
 function drawBubbles(){
-    for (i=0 ; i < bubbles.length ; i++){
+    for (let i=0 ; i < bubbles.length ; i++){
         bubbles[i].place();
     };
 };
@@ -96,7 +96,7 @@ function updateGameArea() {
     //this fx redraws every 20ms
     // console.log('updating');
 
-    for (i=0 ; i < bubbles.length ; i++){
+    for (let i=0 ; i < bubbles.length ; i++){
         bubbles[i].updatePosition();
     };
     myGameArea.clear();
@@ -116,7 +116,7 @@ el.addEventListener('click', function(event){
         mouse.y = event.y - 140;
 
         if(mouse.y > 0){
-            for (i=0 ; i < bubbles.length ; i++){
+            for (let i=0 ; i < bubbles.length ; i++){
                 
                 let xClick = mouse.x;
                 let yClick = mouse.y;
