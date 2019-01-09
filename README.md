@@ -2,9 +2,9 @@
 
 Guidelines for Completing the Exercise
 
-    - [ ] Your application should work in current Chrome.
+    - [x] Your application should work in current Chrome.
 
-    - [ ] You can edit any file in the project.
+    - [x] You can edit any file in the project.
 
     - [ ] When you are ready to share your work, respond to the original email; please include a link to this page, and the approximate amount of time you spent on the exercise.
 
@@ -30,6 +30,6 @@ Building the Game
 
     - [x] When a player touches or clicks a dot, the dot should disappear from the box and a new dot should appear at the top of the page 1000ms later.
     
-    - [ ] The score should be incremented by a value inversely proportional to the size of the dot, with 10px dots worth 10 points, and 100px dots worth 1 point.
+    - [x] The score should be incremented by a value inversely proportional to the size of the dot, with 10px dots worth 10 points, and 100px dots worth 1 point.
 
     - [x] A new dot should also appear every 1000ms.
