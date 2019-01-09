@@ -1,4 +1,5 @@
 const scoreBoard = document.getElementById('scoreRead');
+const scoreReport = document.getElementById('scoreReport');
 const el = document.getElementById('clickFrame');
 let mouse = {x: undefined, y: undefined};
 let bubbles = [];
@@ -24,12 +25,13 @@ var myGameArea = {
     blowCycle : 0,
 };
 
-function Bubble(x, y, radius, color) {
+function Bubble(x, y, radius, color, fillC) {
 
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.color = color;
+    this.fillC = fillC;
 
     this.updatePosition = function(){
         // TASK: Dots fall smoothly at a constant rate.
@@ -43,6 +45,8 @@ function Bubble(x, y, radius, color) {
             c.beginPath();
             c.arc(this.x, this.y, this.radius, Math.PI * 2, false);
             c.strokeStyle = color.toString();
+            c.fillStyle = this.fillC;
+            c.fill();
             c.stroke();
     };
 };
@@ -65,9 +69,10 @@ function blowBubble(){
     let x = Math.random() * (myGameArea.canvas.width - radius * 2) + radius;
     // TASK: New dots appear at a random horizontal position at the top of the box.
     let y = 0 - radius;
-    var color = getColor();
+    let color = getColor();
+    let fill = getColor();
 
-    b = new Bubble(x, y, radius, color);
+    b = new Bubble(x, y, radius, color, fill);
     bubbles.push(b);
 
 };
@@ -111,6 +116,10 @@ function updateGameArea() {
     };
 };
 
+function clearScoreReport(){
+    scoreReport.innerHTML = ''
+}
+
 el.addEventListener('click', function(event){
         mouse.x = event.x;
         mouse.y = event.y - 140;
@@ -137,8 +146,10 @@ el.addEventListener('click', function(event){
                     let newPoints = Math.floor((10 - (bubbles[i].radius * 2) / 10) + 1);
     
                     score += newPoints;
-    
+                    scoreReport.innerHTML = "+ " + newPoints.toString();
                     scoreBoard.innerHTML = score.toString();
+                    setTimeout(clearScoreReport, 500);
+
                     // TASK: When a player touches or clicks a dot,
                     // the dot should disappear from the box and
                     // a new dot should appear at the top of the page 1000ms later.
