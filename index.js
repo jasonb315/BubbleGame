@@ -1,5 +1,3 @@
-////////[:][:][:][:]////////
-
 // 10-100px per sec
 var speed= 10;
 
@@ -9,15 +7,15 @@ var bubbles = [];
 // event listener for click on each
     // score += (size by speed)
 
-////////[:][:][:][:]////////
-
 function Bubble(x, y, size) {
     this.x = x;
     this.y = y;
     this.size = size;
 
     this.updatePosition = function(){
-        this.y += speed;
+        // this will be called every 20ms, so that's 50 updates per second.
+        // y = the position it's at, plus pix per sec over refresh ratio; so the speed is per sec in ms.
+        this.y = (y + speed/50);
     };
 
     this.place = function() {
@@ -32,7 +30,8 @@ function blowBubble(){
     // out: bubble to bubbles
     // 10 to 100px bubble size
     let radius = Math.random() * (100-10) + 10;
-    let x = 50;
+    let x = Math.random() * (window.innerWidth-(radius/2)) + (radius/2);
+    // Math.random() * (max - min) + min;
     let y = 50;
     b = new Bubble(x, y, radius);
     bubbles.push(b);
@@ -61,18 +60,34 @@ var myGameArea = {
         this.context = this.canvas.getContext("2d");
         // append to DOM:
         document.body.insertBefore(this.canvas, document.body.firstChild);
-
-        this.interval = setInterval(updateGameArea, 1000);
+        this.interval = setInterval(updateGameArea, 20);
         },
 
     clear : function() {
-        // some code that clears the canvas for redraw
-    }
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+
+    blowCycle : 0,
 }
 
 
 ////////XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX//////
 
 function updateGameArea() {
-    console.log('updating');
+    //this fx redraws every 20ms
+    for (i=0 ; i < bubbles.length ; i++){
+        bubbles[i].updatePosition();
+    }
+    myGameArea.clear();
+    drawBubbles();
+
+    myGameArea.blowCycle += 20;
+
+    if (myGameArea.blowCycle === 1000){
+        // per second updates, happens once every 50 cycles = 1000 ms
+        blowBubble();
+        myGameArea.blowCycle = 0;
+    }
+    
+    // // console.log('updating');
 }
