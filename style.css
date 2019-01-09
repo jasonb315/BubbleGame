@@ -1,12 +1,11 @@
 canvas {
-    border:3px solid black;
-    background-color: white;
-    margin: 0px;
-    padding: 0px;
+    border:3px solid #444444;
+    background-color: black;
+    border-radius: 10px;
 }
 
 * {
-    background-color: white;
+    background-color: #f1f1f1;
 }
 
 #infoBoard{
@@ -25,8 +24,55 @@ canvas {
     position: absolute;
     top: 30px;
     left: 10%;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 2.5em;
 }
 
 #scoreRead{
     position: relative;
 }
+
+#speedBox{
+    font-size: .8em;
+}
+
+/* Slider */
+
+.slidecontainer {
+    margin: 0 auto;
+    width: 80%;
+    position: absolute;
+    bottom: 40px;
+    left: 10%;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.5;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: black;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+  }

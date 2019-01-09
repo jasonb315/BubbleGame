@@ -1,15 +1,9 @@
-// 10-100px per sec
 let speed = 10;
 let bubbles = [];
 let score = 0;
 
 const scoreBoard = document.getElementById('scoreRead');
 scoreBoard.innerHTML='0'
-// scoreBoard.textContent('pop the bubbles!')
-// create a bubble each second, or 1000ms
-// render them all updated to position on interval
-// event listener for click on each
-    // score += (size by speed)
 
 function Bubble(x, y, radius, color) {
     this.x = x;
@@ -114,8 +108,7 @@ var mouse = {x: undefined, y: undefined};
 el.addEventListener('click', function(event){
         mouse.x = event.x;
         mouse.y = event.y - 140;
-        console.log(mouse);
-        // for (i=0 ; i < bubbles.length ; i++){
+
         if(mouse.y > 0){
             for (i=0 ; i < bubbles.length ; i++){
                 
