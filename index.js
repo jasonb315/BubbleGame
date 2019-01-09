@@ -42,7 +42,6 @@ var myGameArea = {
 };
 
 function Bubble(x, y, radius, color, fillC) {
-
     this.x = x;
     this.y = y;
     this.radius = radius;
@@ -62,7 +61,7 @@ function Bubble(x, y, radius, color, fillC) {
         if (this.pop && this.radius < 6){
             this.radius = 0;
         }
-        //pop if redlined:
+        //pop if redlined at #movtivation:
         if (this.y + this.radius > motivation){
             if (this.pop == false){
                 let newPoints = radPoint[(Math.floor((this.radius * 2) / 10 ) * 10)];
@@ -74,7 +73,7 @@ function Bubble(x, y, radius, color, fillC) {
                 scoreBoard.innerHTML = score.toString();
             }
             this.pop = true;
-        }
+        };
     };
 
     this.place = function() {
@@ -98,6 +97,8 @@ function getColor(){
 
     return color;
 }
+
+let bubId = 0;
 
 function blowBubble(){
     // TASK: Dots should vary randomly in size from 10px in diameter to 100px in DIAMETER!
@@ -143,6 +144,11 @@ function updateGameArea() {
     for (let i=0 ; i < bubbles.length ; i++){
         let bub = bubbles[i];
         bub.updatePosition();
+
+        //reuse loop to cleanup popped bubbles from global array to reduce loop times:
+        if (bub.radius === 0){
+            bubbles.splice(i, 1)
+        }
     };
 
     myGameArea.clear();
@@ -164,6 +170,10 @@ function clearMotivationReport(){
 function clearScoreReport(){
     scoreReport.innerHTML = ''
 }
+
+// function clearText(t){
+//     t.innerHTML = '';
+// }
 
 el.addEventListener('click', function(event){
         mouse.x = event.x;
@@ -222,3 +232,4 @@ slider.oninput = function() {
     // and at the SLIDER's right-most position, should fall at a speed of 100px per second.
   speed = this.value;
 };
+
