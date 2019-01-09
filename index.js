@@ -7,21 +7,22 @@ var bubbles = [];
 // event listener for click on each
     // score += (size by speed)
 
-function Bubble(x, y, size) {
+function Bubble(x, y, size, color) {
     this.x = x;
     this.y = y;
     this.size = size;
+    this.color = color;
 
     this.updatePosition = function(){
         // this will be called every 20ms, so that's 50 updates per second.
         // y = the position it's at, plus pix per sec over refresh ratio; so the speed is per sec in ms.
         this.y = (this.y + speed/50);
     };
-
     this.place = function() {
             c = myGameArea.context;
             c.beginPath();
             c.arc(this.x, this.y, this.size, Math.PI * 2, false);
+            c.strokeStyle = color.toString();
             c.stroke();
     };
 };
@@ -33,7 +34,13 @@ function blowBubble(){
     let x = Math.random() * (window.innerWidth-(radius/2)) + (radius/2);
     // Math.random() * (max - min) + min;
     let y = 50;
-    b = new Bubble(x, y, radius);
+    
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+    b = new Bubble(x, y, radius, color);
     bubbles.push(b);
 };
 
@@ -59,7 +66,7 @@ var myGameArea = {
         // canvas type:
         this.context = this.canvas.getContext("2d");
         // append to DOM:
-        document.body.insertBefore(this.canvas, document.body.firstChild);
+        document.body.insertBefore(this.canvas, document.getElementById('bubbleCavas'));
         this.interval = setInterval(updateGameArea, 20);
         },
 
