@@ -12,5 +12,17 @@ canvas {
 #infoBoard{
     height: 141px;
     position: relative;
+    text-align: center;
 }
 
+#infoBoard > p {
+    position: absolute;
+    bottom: 10px;
+    left: 10%;
+}
+
+#scoreRead{
+    position: absolute;
+    top: 30px;
+    left: 10%;
+}
