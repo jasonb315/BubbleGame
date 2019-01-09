@@ -25,19 +25,27 @@ var myGameArea = {
     blowCycle : 0,
 };
 
-function Bubble(x, y, radius, color, fillC) {
+function Bubble(x, y, radius, color, fillC, pop=false) {
 
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.color = color;
     this.fillC = fillC;
+    this.pop = pop;
 
     this.updatePosition = function(){
         // TASK: Dots fall smoothly at a constant rate.
         // this will be called every 20ms, so that's 50 updates per second.
         // y = the position it's at, plus pix per sec over refresh ratio; so the speed is per sec in ms.
         this.y = (this.y + speed / 50);
+
+        if (this.pop && this.radius > 1){
+            this.radius -= 6;
+        }
+        if (this.pop && this.radius < 6){
+            this.radius = 0;
+        }
     };
 
     this.place = function() {
@@ -49,6 +57,19 @@ function Bubble(x, y, radius, color, fillC) {
             c.fill();
             c.stroke();
     };
+
+    // this.pOp = function(){
+    //     for (let i = 0 ; i < 10 ; i++){
+
+    //         this.radius = this.radius/2;
+    //     }
+        // this.radius = this.radius/2;
+        // while(this.radius > 0){
+        //     setTimeout(function() {
+        //         this.radius -=
+        //     }, 50);
+        // }
+    
 };
 
 function getColor(){
@@ -102,8 +123,10 @@ function updateGameArea() {
     // console.log('updating');
 
     for (let i=0 ; i < bubbles.length ; i++){
-        bubbles[i].updatePosition();
+        let bub = bubbles[i];
+        bub.updatePosition();
     };
+
     myGameArea.clear();
     drawBubbles();
 
@@ -153,7 +176,8 @@ el.addEventListener('click', function(event){
                     // TASK: When a player touches or clicks a dot,
                     // the dot should disappear from the box and
                     // a new dot should appear at the top of the page 1000ms later.
-                    bubbles.splice(i, 1);
+                    bubbles[i].pop = true;
+                    // bubbles.splice(i, 1);
                     setTimeout(blowBubble, 1000);
                 };      
             };
